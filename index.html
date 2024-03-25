@@ -19,7 +19,7 @@
           </tr>
         </table>
 
-        <button class="button" type="button">
+        <button class="button addBookBtn" type="button">
           <span class="button__text">Add Book</span>
           <span class="button__icon"
             ><svg
@@ -40,6 +40,32 @@
         </button>
       </div>
     </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+
+        <div class="form-container">
+          <form class="form">
+            <p class="form-title">Add A Book</p>
+            <div class="input-container">
+              <input type="text" placeholder="Title" />
+              <span> </span>
+            </div>
+            <div class="input-container">
+              <input type="text" placeholder="Author" />
+            </div>
+            <div class="input-container">
+              <input type="number" placeholder="Pages" />
+            </div>
+            <button type="submit" class="submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
   </body>
 </html>
