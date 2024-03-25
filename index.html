@@ -49,9 +49,14 @@
 
         <div class="form-container">
           <form class="form">
-            <p class="form-title">Add A Book</p>
+            <p class="form-title">Add a Book</p>
             <div class="input-container">
-              <input type="text" placeholder="Title" />
+              <input
+                type="text"
+                placeholder="Title"
+                minlength="1"
+                maxlength="20"
+              />
               <span> </span>
             </div>
             <div class="input-container">
@@ -59,6 +64,28 @@
             </div>
             <div class="input-container">
               <input type="number" placeholder="Pages" />
+            </div>
+            <div class="radio-container">
+              <div>
+                <input
+                  type="radio"
+                  class="input-radio"
+                  id="radio-1"
+                  name="status"
+                  value="read"
+                />
+                <label for="radio-1">Read</label>
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  class="input-radio"
+                  id="radio-2"
+                  name="status"
+                  value="not read yet"
+                />
+                <label for="radio-2">Unread</label>
+              </div>
             </div>
             <button type="submit" class="submit">Submit</button>
           </form>
