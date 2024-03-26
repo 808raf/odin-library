@@ -16,6 +16,7 @@
             <th>Author</th>
             <th>Pages</th>
             <th>Status</th>
+            <th>Delete?</th>
           </tr>
         </table>
 
@@ -52,6 +53,7 @@
             <p class="form-title">Add a Book</p>
             <div class="input-container">
               <input
+                class="title"
                 type="text"
                 placeholder="Title"
                 minlength="1"
@@ -60,16 +62,16 @@
               <span> </span>
             </div>
             <div class="input-container">
-              <input type="text" placeholder="Author" />
+              <input class="author" type="text" placeholder="Author" />
             </div>
             <div class="input-container">
-              <input type="number" placeholder="Pages" />
+              <input class="pages" type="number" placeholder="Pages" />
             </div>
             <div class="radio-container">
               <div>
                 <input
                   type="radio"
-                  class="input-radio"
+                  class="input-radio read status"
                   id="radio-1"
                   name="status"
                   value="read"
@@ -79,7 +81,7 @@
               <div>
                 <input
                   type="radio"
-                  class="input-radio"
+                  class="input-radio unread status"
                   id="radio-2"
                   name="status"
                   value="not read yet"
