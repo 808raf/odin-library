@@ -39,13 +39,14 @@ const createDefaultTable = () => {
     const bookDelete = document.createElement("td");
 
     row.setAttribute("data-bookid", idx);
+    bookDelete.setAttribute("data-delete-bookid", idx);
     row.classList.add("book");
 
     bookTitle.innerText = `${book.title}`;
     bookAuthor.innerText = `${book.author}`;
     bookPages.innerText = `${book.pages}`;
     bookStatus.innerText = `${book.read}`;
-    bookDelete.innerHTML = `<button class="bin-button">
+    bookDelete.innerHTML = `<button class="bin-button" data-delete-bookid="${idx}">
     <svg
       class="bin-top"
       viewBox="0 0 39 7"
@@ -104,7 +105,9 @@ const updateTable = (book) => {
   bookAuthor.innerText = `${book.author}`;
   bookPages.innerText = `${book.pages}`;
   bookStatus.innerText = `${book.read}`;
-  bookDelete.innerHTML = `<button class="bin-button">
+  bookDelete.innerHTML = `<button class="bin-button" data-delete-bookid="${
+    myLibrary.length - 1
+  }">
     <svg
       class="bin-top"
       viewBox="0 0 39 7"
@@ -201,3 +204,28 @@ const handleFormSubmit = (e) => {
 };
 
 submitBtn.addEventListener("click", handleFormSubmit);
+
+const deleteBtn = document.querySelectorAll(".bin-button");
+
+const handleBookDelete = (e) => {
+  //grab row index
+  //delete row using index
+  //modify myLibrary to remove book using index
+  const table = document.querySelector(".book-table");
+
+  const deleteBookBtn = e.currentTarget;
+  let bookIdx = deleteBookBtn.dataset.deleteBookid;
+
+  table.deleteRow(Number(bookIdx) + 1);
+
+  if (bookIdx > -1) {
+    myLibrary.splice(Number(bookIdx) + 1, 1);
+  }
+
+  console.log(bookIdx);
+  console.log(myLibrary);
+};
+
+deleteBtn.forEach((button) => {
+  button.addEventListener("click", handleBookDelete);
+});
