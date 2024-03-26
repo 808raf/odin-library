@@ -28,17 +28,31 @@ addBookToLibrary(donQuixote);
 addBookToLibrary(alice);
 console.log(myLibrary);
 
-const createDefaultTable = () => {
-  // <table class="book-table">
-  //         <tr>
-  //           <th>Title</th>
-  //           <th>Author</th>
-  //           <th>Pages</th>
-  //           <th>Status</th>
-  //           <th>Delete?</th>
-  //         </tr>
-  //       </table>
+const handleBookDelete = (e) => {
+  //grab index of book
+  const bookIdx = e.currentTarget.dataset.deleteBookid;
 
+  //remove it from array
+  if (bookIdx > -1) {
+    myLibrary.splice(Number(bookIdx), 1);
+  }
+
+  //call update table to remake the table with the new array
+  updateTable();
+
+  console.log(myLibrary);
+};
+
+const deleteListener = () => {
+  const deleteBtn = document.querySelectorAll(".bin-button");
+
+  deleteBtn.forEach((button) => {
+    button.addEventListener("click", handleBookDelete);
+  });
+};
+
+const createDefaultTable = () => {
+  // Handles creation of table headers
   const newTable = document.createElement("tbody");
   const container = document.querySelector(".book-table");
   container.append(newTable);
@@ -67,6 +81,7 @@ const createDefaultTable = () => {
 
   newTable.append(row);
 
+  // Handles creation of the table rows using myLibrary Array
   myLibrary.forEach((book, idx) => {
     const table = document.querySelector("tbody");
     const row = document.createElement("tr");
@@ -123,6 +138,8 @@ const createDefaultTable = () => {
 
     table.appendChild(row);
     row.append(bookTitle, bookAuthor, bookPages, bookStatus, bookDelete);
+
+    deleteListener();
   });
 };
 
@@ -187,28 +204,3 @@ const handleFormSubmit = (e) => {
 };
 
 submitBtn.addEventListener("click", handleFormSubmit);
-
-const deleteBtn = document.querySelectorAll(".bin-button");
-
-const handleBookDelete = (e) => {
-  //grab index of book
-  //remove it from array
-  //call update table to remake the table with the new array
-  const table = document.querySelector(".book-table");
-
-  const deleteBookBtn = e.currentTarget;
-  let bookIdx = deleteBookBtn.dataset.deleteBookid;
-
-  table.deleteRow(Number(bookIdx) + 1);
-
-  if (bookIdx > -1) {
-    myLibrary.splice(Number(bookIdx) + 1, 1);
-  }
-
-  console.log(bookIdx);
-  console.log(myLibrary);
-};
-
-deleteBtn.forEach((button) => {
-  button.addEventListener("click", handleBookDelete);
-});
