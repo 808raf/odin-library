@@ -43,11 +43,34 @@ const handleBookDelete = (e) => {
   console.log(myLibrary);
 };
 
+const handleBookStatus = (e) => {
+  //grab index of book
+  const bookIdx = e.currentTarget.dataset.bookid;
+
+  // Flip status on click by updating array property
+  myLibrary[bookIdx].read == "read"
+    ? (myLibrary[bookIdx].read = "not read yet")
+    : (myLibrary[bookIdx].read = "read");
+
+  // Display new table from updated array
+  updateTable();
+};
+
 const deleteListener = () => {
   const deleteBtn = document.querySelectorAll(".bin-button");
 
   deleteBtn.forEach((button) => {
     button.addEventListener("click", handleBookDelete);
+  });
+};
+
+const statusListener = () => {
+  // Select all elements with book-status class
+  const bookStatus = document.querySelectorAll(".book-status");
+
+  // Add an event listener for each td with a class of book-status on click
+  bookStatus.forEach((book) => {
+    book.addEventListener("click", handleBookStatus);
   });
 };
 
@@ -93,6 +116,8 @@ const createDefaultTable = () => {
 
     row.setAttribute("data-bookid", idx);
     row.classList.add("book");
+    bookStatus.classList.add("book-status");
+    bookStatus.setAttribute("data-bookid", idx);
 
     bookTitle.innerText = `${book.title}`;
     bookAuthor.innerText = `${book.author}`;
@@ -140,6 +165,7 @@ const createDefaultTable = () => {
     row.append(bookTitle, bookAuthor, bookPages, bookStatus, bookDelete);
 
     deleteListener();
+    statusListener();
   });
 };
 

@@ -294,3 +294,7 @@ header {
 .bin-button:active {
   transform: scale(0.9);
 }
+
+.book-status:hover {
+  cursor: pointer;
+}
