@@ -29,6 +29,44 @@ addBookToLibrary(alice);
 console.log(myLibrary);
 
 const createDefaultTable = () => {
+  // <table class="book-table">
+  //         <tr>
+  //           <th>Title</th>
+  //           <th>Author</th>
+  //           <th>Pages</th>
+  //           <th>Status</th>
+  //           <th>Delete?</th>
+  //         </tr>
+  //       </table>
+
+  const newTable = document.createElement("tbody");
+  const container = document.querySelector(".book-table");
+  container.append(newTable);
+
+  const row = document.createElement("tr");
+
+  const defaultTitle = document.createElement("th");
+  const defaultAuthor = document.createElement("th");
+  const defaultPages = document.createElement("th");
+  const defaultStatus = document.createElement("th");
+  const defaultDelete = document.createElement("th");
+
+  defaultTitle.innerText = `Title`;
+  defaultAuthor.innerText = `Author`;
+  defaultPages.innerText = `Pages`;
+  defaultStatus.innerText = `Status`;
+  defaultDelete.innerText = `Delete?`;
+
+  row.append(
+    defaultTitle,
+    defaultAuthor,
+    defaultPages,
+    defaultStatus,
+    defaultDelete
+  );
+
+  newTable.append(row);
+
   myLibrary.forEach((book, idx) => {
     const table = document.querySelector("tbody");
     const row = document.createElement("tr");
@@ -39,7 +77,6 @@ const createDefaultTable = () => {
     const bookDelete = document.createElement("td");
 
     row.setAttribute("data-bookid", idx);
-    bookDelete.setAttribute("data-delete-bookid", idx);
     row.classList.add("book");
 
     bookTitle.innerText = `${book.title}`;
@@ -92,10 +129,6 @@ const createDefaultTable = () => {
 const updateTable = () => {
   const currTable = document.querySelector("tbody");
   currTable.remove();
-
-  const newTable = document.createElement("tbody");
-  const container = document.querySelector(".book-table");
-  container.append(newTable);
   createDefaultTable();
 };
 
@@ -158,9 +191,9 @@ submitBtn.addEventListener("click", handleFormSubmit);
 const deleteBtn = document.querySelectorAll(".bin-button");
 
 const handleBookDelete = (e) => {
-  //grab row index
-  //delete row using index
-  //modify myLibrary to remove book using index
+  //grab index of book
+  //remove it from array
+  //call update table to remake the table with the new array
   const table = document.querySelector(".book-table");
 
   const deleteBookBtn = e.currentTarget;
